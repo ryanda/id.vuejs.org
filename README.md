@@ -88,7 +88,7 @@ Progress `x is done`:
         ├── forms.md
         ├─x index.md 
         ├─x installation.md
-        ├── instance.md
+        ├─x instance.md
         ├── join.md
         ├── list.md
         ├── migration.md
@@ -102,7 +102,7 @@ Progress `x is done`:
         ├── single-file-components.md
         ├── ssr.md
         ├── state-management.md
-        ├─- syntax.md
+        ├─x syntax.md
         ├── transitioning-state.md
         ├── transitions.md
         ├── typescript.md

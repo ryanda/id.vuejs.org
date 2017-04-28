@@ -4,25 +4,25 @@ type: guide
 order: 4
 ---
 
-Vue.js uses an HTML-based template syntax that allows you to declaratively bind the rendered DOM to the underlying Vue instance's data. All Vue.js templates are valid HTML that can be parsed by spec-compliant browsers and HTML parsers.
+Vue.js menggunakan syntax berbasis HTML, yang memperbolehkan kita mendeklarasikan dan melakukan binding antara DOM dan data. Semua template Vue, adalah HTML yang valid, dan dapat di*parsing*  oleh browser pada umumnya dan *HTML parser*.
 
-Under the hood, Vue compiles the templates into Virtual DOM render functions. Combined with the reactivity system, Vue is able to intelligently figure out the minimal amount of components to re-render and apply the minimal amount of DOM manipulations when the app state changes.
+Vue meng*compile* *template* menjadi fungsi *render Virtual DOM*, dikombinasikan *reactivity system*, Vue memperhitungkan dengan pintar manipulasi DOM apa yang perlu dilakukan dan komponen-komponen apa yang perlu di*render* apabila state berubah.
 
-If you are familiar with Virtual DOM concepts and prefer the raw power of JavaScript, you can also [directly write render functions](render-function.html) instead of templates, with optional JSX support.
+Apabila anda familiar dengan konsep virtual DOM, dan lebih suka membuat fungsi Javascript daripada template, anda dapat [membuat fungsi render sendiri](render-function.html), dengan dukungan JSX (opsional).
 
 ## Interpolations
 
 ### Text
 
-The most basic form of data binding is text interpolation using the "Mustache" syntax (double curly braces):
+*Data binding* paling dasar (satu arah) dapat menggunakan *syntax* "Moustache" (kumis), yaitu kurung kurawal ganda:
 
 ``` html
 <span>Message: {{ msg }}</span>
 ```
 
-The mustache tag will be replaced with the value of the `msg` property on the corresponding data object. It will also be updated whenever the data object's `msg` property changes.
+Tag kumis tersebut akan diganti sesuai dengan property `msg` dari `data`, dan akan di*update* apabila `msg` berubah.
 
-You can also perform one-time interpolations that do not update on data change by using the [v-once directive](../api/#v-once), but keep in mind this will also affect any binding on the same node:
+Apabila semua binding di *node* tersebut hanya ingin dilakukan sekali, gunakan [`v-once` *directive*](../api/#v-once).
 
 ``` html
 <span v-once>This will never change: {{ msg }}</span>
@@ -30,33 +30,33 @@ You can also perform one-time interpolations that do not update on data change b
 
 ### Raw HTML
 
-The double mustaches interprets the data as plain text, not HTML. In order to output real HTML, you will need to use the `v-html` directive:
+Syntax kumis tersebut menghasilkan teks, bukan HTML, apabila ingin menggunakan html, gunakan `v-html` *directive*:
 
 ``` html
 <div v-html="rawHtml"></div>
 ```
 
-The contents are inserted as plain HTML - data bindings are ignored. Note that you cannot use `v-html` to compose template partials, because Vue is not a string-based templating engine. Instead, components are preferred as the fundamental unit for UI reuse and composition.
+Div tersebut akan berisi HTML tanpa *data binding*. `v-html` tidak dapat digunakan sebagai *template partial*, karena Vue bukan *string-based templating engine*. Gunakan komponen untuk membuat unit partial yang lebih kecil agar dapat di*reuse* dan terkomposisi dengan benar.
 
-<p class="tip">Dynamically rendering arbitrary HTML on your website can be very dangerous because it can easily lead to [XSS vulnerabilities](https://en.wikipedia.org/wiki/Cross-site_scripting). Only use HTML interpolation on trusted content and **never** on user-provided content.</p>
+<p class="tip">Merender HTML secara langsung dapat menyebabkan [XSS vulnerabilities](https://en.wikipedia.org/wiki/Cross-site_scripting), gunakan `v-html` hanya apabila isinya terpercaya dan **bukan** inputan dari user.</p>
 
-### Attributes
+### Atribut 
 
-Mustaches cannot be used inside HTML attributes, instead use a [v-bind directive](../api/#v-bind):
+Syntax kumis tidak dapat digunkaan di dalam atribut HTML, tetapi gunakan [v-bind directive](../api/#v-bind):
 
 ``` html
 <div v-bind:id="dynamicId"></div>
 ```
 
-It also works for boolean attributes - the attribute will be removed if the condition evaluates to a falsy value:
+Ini juga berlaku untuk atribut *boolean*, dimana atribut akan dihapus apabila nilainya `falsy`:
 
 ``` html
 <button v-bind:disabled="someDynamicCondition">Button</button>
 ```
 
-### Using JavaScript Expressions
+### Menggunakan Ekspresi Javascript
 
-So far we've only been binding to simple property keys in our templates. But Vue.js actually supports the full power of JavaScript expressions inside all data bindings:
+Selama ini kita hanya membinding nilai ke dalam template, tetapi Vue memperbolehkan ekspresi Javascript di dalam semua data binding:
 
 ``` html
 {{ number + 1 }}
@@ -68,7 +68,7 @@ So far we've only been binding to simple property keys in our templates. But Vue
 <div v-bind:id="'list-' + id"></div>
 ```
 
-These expressions will be evaluated as JavaScript in the data scope of the owner Vue instance. One restriction is that each binding can only contain **one single expression**, so the following will **NOT** work:
+Ekspresi ini akan dievaluasi dengan *scope* *instance*, dengan batasan hanya boleh satu ekspresi Javascript, jadi contoh berikut ini **tidak** akan berjalan:
 
 ``` html
 <!-- this is a statement, not an expression: -->
@@ -77,50 +77,50 @@ These expressions will be evaluated as JavaScript in the data scope of the owner
 <!-- flow control won't work either, use ternary expressions -->
 {{ if (ok) { return message } }}
 ```
+-
+<p class="tip">*Template expressions* dijalankan dalam *sandbox*, dan hanya dapat mengakses variabel global di dalam *whitelist* seperti `Math` dan `date`. </p>
 
-<p class="tip">Template expressions are sandboxed and only have access to a whitelist of globals such as `Math` and `Date`. You should not attempt to access user defined globals in template expressions.</p>
+## Directive
 
-## Directives
-
-Directives are special attributes with the `v-` prefix. Directive attribute values are expected to be **a single JavaScript expression** (with the exception for `v-for`, which will be discussed later). A directive's job is to reactively apply side effects to the DOM when the value of its expression changes. Let's review the example we saw in the introduction:
+*Directive* adalah atribut spesial dengan awalan `v-`, hanya boleh berisi satu ekspresi Javascript kecuali `v-for`. Tujuan dari *directive* adalah untuk menambahkan efek samping ketika nilai dari ekspresi tersebut berubah. Mari coba kita lihat kembali contoh di bagian intro:
 
 ``` html
 <p v-if="seen">Now you see me</p>
 ```
 
-Here, the `v-if` directive would remove/insert the `<p>` element based on the truthiness of the value of the expression `seen`.
+Dalam kasus ini `v-if` akan menghapus atau menampilkan elemen `<p>` berdasarkan nilai `seen`.
 
 ### Arguments
 
-Some directives can take an "argument", denoted by a colon after the directive name. For example, the `v-bind` directive is used to reactively update an HTML attribute:
+*Directive* tertentu dapat menerima *argument* yang ditulis setelah tanda titik dua `:`, sebagai contoh `v-bind`:
 
 ``` html
 <a v-bind:href="url"></a>
 ```
 
-Here `href` is the argument, which tells the `v-bind` directive to bind the element's `href` attribute to the value of the expression `url`.
+Pada contoh di atas `href` adalah *argument*, yang memberitahu `v-bind` bahwa atribut `href` yang akan diisi oleh nilai `url`.
 
-Another example is the `v-on` directive, which listens to DOM events:
+Contoh lain adalah `v-on`, untuk *binding event* DOM:
 
 ``` html
 <a v-on:click="doSomething">
 ```
 
-Here the argument is the event name to listen to. We will talk about event handling in more detail too.
+Kita akan membahas mengenai *event binding* lebih lanjut pada bagian berikutnya.
 
-### Modifiers
+### Modifier
 
-Modifiers are special postfixes denoted by a dot, which indicate that a directive should be bound in some special way. For example, the `.prevent` modifier tells the `v-on` directive to call `event.preventDefault()` on the triggered event:
+*Modifier* adalah akhiran khusus yang diawali dengan titik (.), contoh: `.prevent` membuat `v-on` untuk memanggil `event.preventDefault()` pada event:
 
 ``` html
 <form v-on:submit.prevent="onSubmit"></form>
 ```
 
-We will see more use of modifiers later when we take a more thorough look at `v-on` and `v-model`.
+Kita akan membahas mengenai ini lebih lanjut pada bagian `v-on` dan `v-model`.
 
 ## Filters
 
-Vue.js allows you to define filters that can be used to apply common text formatting. Filters are usable in two places: **mustache interpolations and `v-bind` expressions**. Filters should be appended to the end of the JavaScript expression, denoted by the "pipe" symbol:
+Vue.js memperbolehkan filter untuk melakukan formatting pada *syntax* kumis ataupun `v-bind`, dengan menambahkan *pipe* (|):
 
 ``` html
 <!-- in mustaches -->
@@ -130,9 +130,9 @@ Vue.js allows you to define filters that can be used to apply common text format
 <div v-bind:id="rawId | formatId"></div>
 ```
 
-<p class="tip">Vue 2.x filters can only be used inside mustache interpolations and `v-bind` expressions (the latter supported since 2.1.0), because filters are primarily designed for text transformation purposes. For more complex data transforms in other directives, you should use [Computed properties](computed.html) instead.</p>
+<p class="tip">Untuk transformasi data yang kompleks, gunakan [Computed properties](computed.html).</p>
 
-The filter function always receives the expression's value as the first argument.
+Fungsi *filter* selalu menerima nilai ekspresi sebagai parameter pertama
 
 ``` js
 new Vue({
@@ -147,23 +147,23 @@ new Vue({
 })
 ```
 
-Filters can be chained:
+*Filter* dapat di*chaining*:
 
 ``` html
 {{ message | filterA | filterB }}
 ```
 
-Filters are JavaScript functions, therefore they can take arguments:
+*Filter* adalah fungsi javascsript, dapat diberi parameter:
 
 ``` html
 {{ message | filterA('arg1', arg2) }}
 ```
 
-Here, the plain string `'arg1'` will be passed into the filter as the second argument, and the value of expression `arg2` will be evaluated and passed in as the third argument.
+Dengan catatan parameter pertama akan digeser menjadi parameter kedua (demi menyisipkan nilai ekspresi), dan seterusnya.
 
-## Shorthands
+## Shorthand
 
-The `v-` prefix serves as a visual cue for identifying Vue-specific attributes in your templates. This is useful when you are using Vue.js to apply dynamic behavior to some existing markup, but can feel verbose for some frequently used directives. At the same time, the need for the `v-` prefix becomes less important when you are building an [SPA](https://en.wikipedia.org/wiki/Single-page_application) where Vue.js manages every template. Therefore, Vue.js provides special shorthands for two of the most often used directives, `v-bind` and `v-on`:
+Awalan `v-` digunakan untuk menandai bahwa *attribute* itu adalah dari Vue, terkesan panjang terutama apabila anda membuat [SPA](https://en.wikipedia.org/wiki/Single-page_application) dengan skala besar, oleh karena itu, terdapat 2 shortcut yaitu untuk *directive* yg sering digunakan yaitu `v-bind` and `v-on`:
 
 ### `v-bind` Shorthand
 
@@ -186,4 +186,4 @@ The `v-` prefix serves as a visual cue for identifying Vue-specific attributes i
 <a @click="doSomething"></a>
 ```
 
-They may look a bit different from normal HTML, but `:` and `@` are valid chars for attribute names and all Vue.js supported browsers can parse it correctly. In addition, they do not appear in the final rendered markup. The shorthand syntax is totally optional, but you will likely appreciate it when you learn more about its usage later.
+Terlihat sedikit berbeda dengan HTML pada umumnya, tetapi `:` dan `@` keduanya adalah karakter yang valid untuk nama atribut HTML sehingga browser dapat mem*parsing* dengan benar.
