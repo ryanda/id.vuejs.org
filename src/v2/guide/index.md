@@ -4,27 +4,27 @@ type: guide
 order: 2
 ---
 
-## What is Vue.js?
+## Apa itu Vue.js?
 
-Vue (pronounced /vjuː/, like **view**) is a **progressive framework** for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is very easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with [modern tooling](single-file-components.html) and [supporting libraries](https://github.com/vuejs/awesome-vue#components--libraries).
+Vue (/vjuː/, seperti **view**) adalah *progressive framework* untuk membuat user interface. Berbeda dengan framework monolitis, Vue didesain dari bawah ke atas, agar lebih mudah diadaptasi secara bertahap. Pustaka inti (*core library*) difokuskan pada layer tampilan, dan sangat mudah untuk diintegrasikan dengan pustaka lain atau proyek yang sedang berjalan. Selain itu, Vue juga sangat mampu untuk dipakai sebagai dasar untuk membuat *Single-Page Applications* (SPA) yang kompleks, apabila digunakan bersamaan dengan [komponen tunggal (*single-file component*)](single-file-components.html) dan [pustaka pendukung (*external libraries*)](https://github.com/vuejs/awesome-vue#components--libraries).
 
-If you are an experienced frontend developer and want to know how Vue compares to other libraries/frameworks, check out the [Comparison with Other Frameworks](comparison.html).
+Apabila anda adalah frontend programmer yang berpengalaman, mungkin anda ingin tahu [perbedaan Vue dengan library/framework lainnya](comparison.html).
 
-## Getting Started
+## Memulai
 
-<p class="tip">The official guide assumes intermediate level knowledge of HTML, CSS, and JavaScript. If you are totally new to frontend development, it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back! Prior experience with other frameworks helps, but is not required.</p>
+<p class="tip">Panduan resmi ini mengasumsikan bahwa anda telah memiliki pengetahuan yang cukup mengenai [HTML](https://www.w3schools.com/html/), [CSS](https://www.w3schools.com/css/), dan [Javascript](https://www.w3schools.com/js/). Apabila anda benar-benar baru di bidang *frontend*, langsung menggunakan framework bukanlah ide yang terbaik, pelajari terlebih dahulu [dasar-dasar](https://www.w3schools.com)nya terlebih dahulu. Pengalaman menggunakan framework lain bisa membantu, tetapi tidak diwajibkan dalam mempelajari Vue.</p>
 
-The easiest way to try out Vue.js is using the [JSFiddle Hello World example](https://jsfiddle.net/chrisvfritz/50wL7mdz/). Feel free to open it in another tab and follow along as we go through some basic examples. Or, you can simply create an `.html` file and include Vue with:
+Cara termudah untuk mencoba Vue.js adalah dengan contoh [JSFiddle Hello World](https://jsfiddle.net/chrisvfritz/50wL7mdz/). Silahkan membukanya di tab baru lalu ubah sambil mengikuti contoh-contoh dari tutorial, atau buatlah sebuah file `.html` yang berisi:
 
 ``` html
 <script src="https://unpkg.com/vue"></script>
 ```
 
-The [Installation](installation.html) page provides more options of installing Vue. Note that we **do not** recommend beginners to start with `vue-cli`, especially if you are not yet familiar with Node.js-based build tools.
+Halaman [Instalasi](installation.html) berisi cara-cara lain untuk menginstall Vue. Untuk pemula sebaiknya **tidak** langsung menggunakan `vue-cli`, terutama apabila anda belum memiliki pengalaman menggunakan *build tools* [Node.js](https://nodejs.org/en/).
 
-## Declarative Rendering
+## *Declarative Rendering*
 
-At the core of Vue.js is a system that enables us to declaratively render data to the DOM using straightforward template syntax:
+Inti dari Vue.js adalah sistem untuk me-*render* data ke dalam [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) dengan langkah yang mudah, yaitu menggunakan *syntax template*:
 
 ``` html
 <div id="app">
@@ -35,7 +35,7 @@ At the core of Vue.js is a system that enables us to declaratively render data t
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
+    message: 'Halo Vue!'
   }
 })
 ```
@@ -47,21 +47,21 @@ var app = new Vue({
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!'
+    message: 'Halo Vue!'
   }
 })
 </script>
 {% endraw %}
 
-We have already created our very first Vue app! This looks pretty similar to just rendering a string template, but Vue has done a lot of work under the hood. The data and the DOM are now linked, and everything is now **reactive**. How do we know? Just open your browser's JavaScript console (right now, on this page) and set `app.message` to a different value. You should see the rendered example above update accordingly.
+Kita telah berhasil membuat aplikasi vue pertama kita! Ini sangat mirip seperti me-*render string template*, karena Vue yang mengerjakan hal-hal kompleks di dalamnya. Data dan DOM sekarang saling menyambung dan **reactive**. Bagaimana cara kita tahu bahwa ini sudah *reactive*?
+Buka browser Javascript console pada halaman tersebut, lalu ganti isi variabel `app.message` menjadi nilai lain, maka kita akan melihat perubahan itu juga ter-*render* sesuai template.
 
-In addition to text interpolation, we can also bind element attributes like this:
+Selain *text interpolation* dengan `{{ data }}`, kita juga dapat melakukan penyambungan/pentautan (*binding*) pada atribut elemen dengan `v-bind:`, misal:
 
 ``` html
 <div id="app-2">
   <span v-bind:title="message">
-    Hover your mouse over me for a few seconds
-    to see my dynamically bound title!
+    Arahkkan kursor mouse anda di sini untuk melihat tooltip yang di-binding secara dinamis
   </span>
 </div>
 ```
@@ -69,37 +69,37 @@ In addition to text interpolation, we can also bind element attributes like this
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    message: 'You loaded this page on ' + new Date()
+    message: 'Anda membuka halaman ini pada ' + new Date()
   }
 })
 ```
 {% raw %}
 <div id="app-2" class="demo">
   <span v-bind:title="message">
-    Hover your mouse over me for a few seconds to see my dynamically bound title!
+    Arahkkan kursor mouse anda di sini untuk melihat tooltip yang di-binding secara dinamis
   </span>
 </div>
 <script>
 var app2 = new Vue({
   el: '#app-2',
   data: {
-    message: 'You loaded this page on ' + new Date()
+    message: 'Anda membuka halaman ini pada ' + new Date()
   }
 })
 </script>
 {% endraw %}
 
-Here we are encountering something new. The `v-bind` attribute you are seeing is called a **directive**. Directives are prefixed with `v-` to indicate that they are special attributes provided by Vue, and as you may have guessed, they apply special reactive behavior to the rendered DOM. Here it is basically saying "keep this element's `title` attribute up-to-date with the `message` property on the Vue instance."
+Atribut `v-bind` dinamakan **directive**. Tiap *directive* diawali dengan `v-` untuk menandakan bahwa atribut tersebut disediakan oleh vue, dalam hal ini bertugas untuk menambahkan *reactive behavior* yaitu dalam kasus ini bertugas mengganti isi atribut `title` dari elemen agar selalu sinkron dengan `data.message` dari Vue.
 
-If you open up your JavaScript console again and enter `app2.message = 'some new message'`, you'll once again see that the bound HTML - in this case the `title` attribute - has been updated.
+Apabila kita membuka JavaScript console lalu mengganti `app2.message = 'sesuatu yang baru'`, lalu mengarahkan ulang kursor ke elemen tersebut, anda kita melihat bahwa `title` juga ikut berubah.
 
-## Conditionals and Loops
+## Percabangan dan Perulangan
 
-It's quite simple to toggle the presence of an element, too:
+Dengan Vue, untuk menyembunyikan atau menampilkan elemen menjadi mudah:
 
 ``` html
 <div id="app-3">
-  <p v-if="seen">Now you see me</p>
+  <p v-if="seen">Aku hadir dan menyapa</p>
 </div>
 ```
 
@@ -114,7 +114,7 @@ var app3 = new Vue({
 
 {% raw %}
 <div id="app-3" class="demo">
-  <span v-if="seen">Now you see me</span>
+  <span v-if="seen">Aku hadir dan menyapa</span>
 </div>
 <script>
 var app3 = new Vue({
@@ -126,11 +126,11 @@ var app3 = new Vue({
 </script>
 {% endraw %}
 
-Go ahead and enter `app3.seen = false` in the console. You should see the message disappear.
+Apabila kita ubah `app3.seen = false` di console, maka elemen tersebut akan menghilang.
 
-This example demonstrates that we can bind data to not only text and attributes, but also the **structure** of the DOM. Moreover, Vue also provides a powerful transition effect system that can automatically apply [transition effects](transitions.html) when elements are inserted/updated/removed by Vue.
+Contoh ini mendemonstrasikan bahwa kita dapat melakukan binding data tidak hanya pada teks ataupun atribut, tetapi juga pada struktur dari DOM. Vue juga menyediakan [efek transisi](transitions.html) (animasi), yang dieksekusi ketika elemen ditambahkan/diupdate/dihapus oleh Vue.
 
-There are quite a few other directives, each with its own special functionality. For example, the `v-for` directive can be used for displaying a list of items using the data from an Array:
+Terdapat beberapa *directive* lain, yang memiliki fungsi yang berbeda, seperti `v-for` untuk melakukan perulangan untuk tiap elemen dari Array:
 
 ``` html
 <div id="app-4">
@@ -146,9 +146,9 @@ var app4 = new Vue({
   el: '#app-4',
   data: {
     todos: [
-      { text: 'Learn JavaScript' },
-      { text: 'Learn Vue' },
-      { text: 'Build something awesome' }
+      { text: 'Belajar JavaScript' },
+      { text: 'Belajar Vue' },
+      { text: 'Buat sesuatu yang keren' }
     ]
   }
 })
@@ -166,32 +166,32 @@ var app4 = new Vue({
   el: '#app-4',
   data: {
     todos: [
-      { text: 'Learn JavaScript' },
-      { text: 'Learn Vue' },
-      { text: 'Build something awesome' }
+      { text: 'Belajar JavaScript' },
+      { text: 'Belajar Vue' },
+      { text: 'Buat sesuatu yang keren' }
     ]
   }
 })
 </script>
 {% endraw %}
 
-In the console, enter `app4.todos.push({ text: 'New item' })`. You should see a new item appended to the list.
+Di console, ketik `app4.todos.push({ text: 'Belajar Weex' })`, maka item yang baru akan muncul.
 
-## Handling User Input
+## Menangani Inputan User
 
-To let users interact with your app, we can use the `v-on` directive to attach event listeners that invoke methods on our Vue instances:
+Untuk menangkap event, kita dapat mendambahkan `v-on` *directive*:
 
 ``` html
 <div id="app-5">
   <p>{{ message }}</p>
-  <button v-on:click="reverseMessage">Reverse Message</button>
+  <button v-on:click="reverseMessage">Balik Pesan</button>
 </div>
 ```
 ``` js
 var app5 = new Vue({
   el: '#app-5',
   data: {
-    message: 'Hello Vue.js!'
+    message: 'Halo Vue.js!'
   },
   methods: {
     reverseMessage: function () {
@@ -203,13 +203,13 @@ var app5 = new Vue({
 {% raw %}
 <div id="app-5" class="demo">
   <p>{{ message }}</p>
-  <button v-on:click="reverseMessage">Reverse Message</button>
+  <button v-on:click="reverseMessage">Balik Pesan</button>
 </div>
 <script>
 var app5 = new Vue({
   el: '#app-5',
   data: {
-    message: 'Hello Vue.js!'
+    message: 'Halo Vue.js!'
   },
   methods: {
     reverseMessage: function () {
@@ -220,9 +220,9 @@ var app5 = new Vue({
 </script>
 {% endraw %}
 
-Note in the method we simply update the state of our app without touching the DOM - all DOM manipulations are handled by Vue, and the code you write is focused on the underlying logic.
+Di dalam *method* reverseMessage tersebut kita tidak memanipulasi DOM secara langsung, tetapi melalui Vue, sehingga kode yang kita tuliskan hanya perlu berfokus pada logika bisnisnya saja.
 
-Vue also provides the `v-model` directive that makes two-way binding between form input and app state a breeze:
+Vue juga menyediakan `v-model` *directive*, untuk melakukan *binding* 2 arah antara form input dan *state* data aplikasi:
 
 ``` html
 <div id="app-6">
@@ -234,7 +234,7 @@ Vue also provides the `v-model` directive that makes two-way binding between for
 var app6 = new Vue({
   el: '#app-6',
   data: {
-    message: 'Hello Vue!'
+    message: 'Halo Vue!'
   }
 })
 ```
@@ -247,19 +247,19 @@ var app6 = new Vue({
 var app6 = new Vue({
   el: '#app-6',
   data: {
-    message: 'Hello Vue!'
+    message: 'Halo Vue!'
   }
 })
 </script>
 {% endraw %}
 
-## Composing with Components
+## Menyusun dengan Komponen
 
-The component system is another important concept in Vue, because it's an abstraction that allows us to build large-scale applications composed of small, self-contained, and often reusable components. If we think about it, almost any type of application interface can be abstracted into a tree of components:
+*Component system* adalah salah satu konsep penting di Vue, karena terdapat abstraksi yang memperbolehkan pembuatan aplikasi berskala besar yang tersusun atas komponen-komponen kecil yang mandiri dan dapat dipergunakan di proyek lain (*reusable*). Apabila If we think about it, almost any type of application interface can be abstracted into a tree of components:
 
 ![Component Tree](/images/components.png)
 
-In Vue, a component is essentially a Vue instance with pre-defined options. Registering a component in Vue is straightforward:
+Komponen di Vue sebenarnya adalah sebuah *instance* dengan opsi-opsi yang telah diatur sejak awal (*predefined*). Untuk mendaftarkan sebuah komponen di Vue:
 
 ``` js
 // Define a new component called todo-item
@@ -268,7 +268,7 @@ Vue.component('todo-item', {
 })
 ```
 
-Now you can compose it in another component's template:
+Kita dapat menggunakannya ke dalam komponen lain seperti tag html biasa:
 
 ``` html
 <ol>
@@ -277,7 +277,7 @@ Now you can compose it in another component's template:
 </ol>
 ```
 
-But this would render the same text for every todo, which is not super interesting. We should be able to pass data from the parent scope into child components. Let's modify the component definition to make it accept a [prop](components.html#Props):
+Namun ini akan me*render* teks yang sama untuk tiap `todo-item`, untuk mem*passing* data dari *parent* ke *child* kita dapat menggunakan atribut, yaitu pada Vue dinamakan [prop](components.html#Props):
 
 ``` js
 Vue.component('todo-item', {
@@ -289,7 +289,7 @@ Vue.component('todo-item', {
 })
 ```
 
-Now we can pass the todo into each repeated component using `v-bind`:
+Sekarang kita dapat menambahkan atribut `todo` untuk tiap komponen yang berulang, yaitu dengan `v-bind`:
 
 ``` html
 <div id="app-7">
@@ -341,9 +341,9 @@ var app7 = new Vue({
 </script>
 {% endraw %}
 
-This is just a contrived example, but we have managed to separate our app into two smaller units, and the child is reasonably well-decoupled from the parent via the props interface. We can now further improve our `<todo-item>` component with more complex template and logic without affecting the parent app.
+Ini hanya contoh sederhana, dimana kita berhasil memisahkan aplikasi kita ke dalam 2 komponen yang lebih kecil, dan melakukan komuniakasi dari *parent* ke *child* melalui `props`. Sekarang kita dapat memperbaiki komponen `<todo-item>` dengan *template* dan logika yang lebih kompleks tanpa mempengaruhi *parent*.
 
-In a large application, it is necessary to divide the whole app into components to make development manageable. We will talk a lot more about components [later in the guide](components.html), but here's an (imaginary) example of what an app's template might look like with components:
+Pada aplikasi yang lebih besar, adalah penting untuk memisahkan aplikasi ke dalam komponen-komponen kecil agar lebih mudah di*maintain*. Tutorial akan membahas tentang [komponen](components.html) lebih lanjut nanti, ini adalah sedikit gambaran bagaimana *template* aplikasi apabila dibuat dengan komponen:
 
 ``` html
 <div id="app">
@@ -355,14 +355,15 @@ In a large application, it is necessary to divide the whole app into components 
 </div>
 ```
 
-### Relation to Custom Elements
+### Hubungan dengan Custom Element
 
-You may have noticed that Vue components are very similar to **Custom Elements**, which are part of the [Web Components Spec](http://www.w3.org/wiki/WebComponents/). That's because Vue's component syntax is loosely modeled after the spec. For example, Vue components implement the [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) and the `is` special attribute. However, there are a few key differences:
+Komponen di Vue sangat mirip dengan **Custom Elements**, yang merupakan bagian dari [Web Components Spec](http://www.w3.org/wiki/WebComponents/). 
+Hal ini karena syntax komponen di vue memang diimplementasikan menyerupai model spesifikasi tersebut, seperti [Slot API](https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md) dan atribut `is`, tetapi dengan perbedaan utama:
 
-1. The Web Components Spec is still in draft status, and is not natively implemented in every browser. In comparison, Vue components don't require any polyfills and work consistently in all supported browsers (IE9 and above). When needed, Vue components can also be wrapped inside a native custom element.
+1. Spesifikasi Web Components masih bersifat draft, dan belum diimplementasikan di semua browser, sedangkan di Vue dapat berjalan di semua browser (IE9+) dan tidak membutuhkan [polyfills](https://polyfill.io). Apabila dibutuhkan, komponen vue dapat dibungkus di dalam custom element yang *native*.
 
-2. Vue components provide important features that are not available in plain custom elements, most notably cross-component data flow, custom event communication and build tool integrations.
+2. Komponen di Vue, menyediakan fitur-fitur yang tidak terdapat di Custom Elements, seperti: *cross-component data flow*, *custom event communication* dan integrasi dengan *build tool*.
 
-## Ready for More?
+## Tertarik untuk mempelajari lebih lanjut?
 
-We've just briefly introduced the most basic features of Vue.js core - the rest of this guide will cover them and other advanced features with much finer details, so make sure to read through it all!
+Kita baru saja mempelajari fitur-fitur dasar dari Vue.js, panduan ini akan mencakup fitur-fitur lanjut dan lebih mendetil, pastikan anda membacanya secara menyeluruh.
