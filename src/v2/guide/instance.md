@@ -6,7 +6,7 @@ order: 3
 
 ## Constructor
 
-Every Vue vm is bootstrapped by creating a **root Vue instance** with the `Vue` constructor function:
+Tiap *instance* Vue dibuat dengan membuat **root Vue instance** dengan fungsi constructor `Vue`:
 
 ``` js
 var vm = new Vue({
@@ -14,11 +14,11 @@ var vm = new Vue({
 })
 ```
 
-Although not strictly associated with the [MVVM pattern](https://en.wikipedia.org/wiki/Model_View_ViewModel), Vue's design was partly inspired by it. As a convention, we often use the variable `vm` (short for ViewModel) to refer to our Vue instances.
+Sekalipun tidak terasosiasi dengan pattern [MVVM](https://en.wikipedia.org/wiki/Model_View_ViewModel), Vue didesain dengan mengambil inspirasi dari model tersebut, sebagai konvensi, kita gunakan variabel `vm` (singkatan dari ViewModel) untuk merefer kepada sebuah *instance* Vue.
 
-When you instantiate a Vue instance, you need to pass in an **options object** which can contain options for data, template, element to mount on, methods, lifecycle callbacks and more. The full list of options can be found in the [API reference](../api).
+Tiap kali membuat sebuah *instance* Vue, kita perlu menambahkan **options object** yang dapat berisi `data`, `template`, `element` tempat instance bernaung, `methods`, `lifecycle callbacks`, dll. Daftar lengkap semua opsi yang ada terdapat pada [API reference](../api).
 
-The `Vue` constructor can be extended to create reusable **component constructors** with pre-defined options:
+*Constructor* `Vue` dapat di*extend* untuk membuat *component constructor* baru, yaitu dengan cara:
 
 ``` js
 var MyComponent = Vue.extend({
@@ -30,11 +30,11 @@ var MyComponent = Vue.extend({
 var myComponentInstance = new MyComponent()
 ```
 
-Although it is possible to create extended instances imperatively, most of the time it is recommended to compose them declaratively in templates as custom elements. We will talk about [the component system](components.html) in detail later. For now, you just need to know that all Vue components are essentially extended Vue instances.
+Sekalipun dapat juga kita melakukan extend secara imperatif, tetapi direkomenasikan untuk membuatnya secara deklaratif sebagai template sebagai [*custom element*](components.html) yang akan kita bahas lebih lanjut nanti. Untuk saat ini kita hanya perlu tahu bahwa tiap komponen di Vue adalah sebuah Vue *instance* yang telah di*extend*.
 
-## Properties and Methods
+## Property dan Method
 
-Each Vue instance **proxies** all the properties found in its `data` object:
+Tiap *instance* Vue terhubung dengan tiap *property* yang ada di dalam *data*:
 
 ``` js
 var data = { a: 1 }
@@ -53,9 +53,9 @@ data.a = 3
 vm.a // -> 3
 ```
 
-It should be noted that only these proxied properties are **reactive**. If you attach a new property to the instance after it has been created, it will not trigger any view updates. We will discuss the reactivity system in detail later.
+*Property* yang terhubung otomatis **hanya** untuk *property* yang sudah ada sebelum *instance* Vue dibuat.
 
-In addition to data properties, Vue instances expose a number of useful instance properties and methods. These properties and methods are prefixed with `$` to differentiate them from proxied data properties. For example:
+Selain `data`, *method-method* dan *property* milik instance juga terekspos keluar dengan tambahan `$` untuk membedakan dengan yang berasal dari `data`, contoh:
 
 ``` js
 var data = { a: 1 }
@@ -73,13 +73,13 @@ vm.$watch('a', function (newVal, oldVal) {
 })
 ```
 
-<p class="tip">Don't use [arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) on an instance property or callback (e.g. `vm.$watch('a', newVal => this.myMethod())`). As arrow functions are bound to the parent context, `this` will not be the Vue instance as you'd expect and `this.myMethod` will be undefined.</p>
+<p class="tip">Jangan menggunakan [arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions) di dalam *instance property* atau *callback* (contoh: `vm.$watch('a', newVal => this.myMethod())`). Karena *arrow functions* terhubung ke (parent context*, `this` tidak akan berisi Vue *instance*, dan `this.myMethod` akan berisi undefined.</p>
 
-Consult the [API reference](../api) for the full list of instance properties and methods.
+Lihat [API reference](../api) untuk daftar *property* dan *method*.
 
 ## Instance Lifecycle Hooks
 
-Each Vue instance goes through a series of initialization steps when it is created - for example, it needs to set up data observation, compile the template, mount the instance to the DOM, and update the DOM when data changes. Along the way, it will also invoke some **lifecycle hooks**, which give us the opportunity to execute custom logic. For example, the [`created`](../api/#created) hook is called after the instance is created:
+Tiap *instance* Vue melalui sejumlah fungsi selama masa hidupnya, seperti: observasi perubahan data, *compile*, *mount* ke DOM, *update* DOM ketika data berubah. Terdapat **lifecycle hooks**, yaitu *callback* yang dipanggil ketika event terjadi suatu pada instance tersebut, misal [`created`](../api/#created) yaitu *hook* yang dipanggil ketika dia dibuat:
 
 ``` js
 var vm = new Vue({
@@ -93,11 +93,9 @@ var vm = new Vue({
 })
 // -> "a is: 1"
 ```
-
-There are also other hooks which will be called at different stages of the instance's lifecycle, for example [`mounted`](../api/#mounted), [`updated`](../api/#updated), and [`destroyed`](../api/#destroyed). All lifecycle hooks are called with their `this` context pointing to the Vue instance invoking it. You may have been wondering where the concept of "controllers" lives in the Vue world and the answer is: there are no controllers. Your custom logic for a component would be split among these lifecycle hooks.
-
+Terdapat berbagai *hook* yang lain, seperti [`mounted`](../api/#mounted), [`updated`](../api/#updated), dan [`destroyed`](../api/#destroyed). Konteks `this` tersambung dengan *instance*. Anda mungkin menanyakan dimana konsep *controller* di Vue? Jawabannya adalah tidak ada *controller*. Logika khusus apabila ada, harus diletakkan didalam *hook-hook* tersebut. 
 ## Lifecycle Diagram
 
-Below is a diagram for the instance lifecycle. You don't need to fully understand everything going on right now, but this diagram will be helpful in the future.
+Berikut ini adalah diagram kehidupan sebuah *instance*.
 
 ![Lifecycle](/images/lifecycle.png)
