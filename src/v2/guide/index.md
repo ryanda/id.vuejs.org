@@ -364,6 +364,6 @@ Hal ini karena syntax komponen di vue memang diimplementasikan menyerupai model 
 
 2. Komponen di Vue, menyediakan fitur-fitur yang tidak terdapat di Custom Elements, seperti: *cross-component data flow*, *custom event communication* dan integrasi dengan *build tool*.
 
-## Tertarik untuk mempelajari lebih lanjut?
+## Ingin mempelajari lebih lanjut?
 
 Kita baru saja mempelajari fitur-fitur dasar dari Vue.js, panduan ini akan mencakup fitur-fitur lanjut dan lebih mendetil, pastikan anda membacanya secara menyeluruh.

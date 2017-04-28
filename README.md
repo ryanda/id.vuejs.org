@@ -53,7 +53,61 @@ French translation is maintained by Vuejs-FR.
 
 ### Bahasa Indonesia
 
-Indonesian translation is maintained by [Kiswono Prayogo](http://github.com/kokizzu/
+Indonesian translation is maintained by [Kiswono Prayogo](http://github.com/kokizzu/)
+
+Progress `x is done`: 
+```
+   v2
+    ├── api
+    │   └── index.md
+    ├── cookbook
+    │   ├── adding-instance-properties.md
+    │   └── index.md
+    ├── examples
+    │   ├── commits.md
+    │   ├── deepstream.md
+    │   ├── elastic-header.md
+    │   ├── firebase.md
+    │   ├── grid-component.md
+    │   ├── hackernews.md
+    │   ├── index.md
+    │   ├── modal.md
+    │   ├── select2.md
+    │   ├── svg.md
+    │   ├── todomvc.md
+    │   └── tree-view.md
+    └── guide
+        ├── class-and-style.md
+        ├── comparison.md
+        ├── components.md
+        ├── computed.md
+        ├── conditional.md
+        ├── custom-directive.md
+        ├── deployment.md
+        ├── events.md
+        ├── forms.md
+        ├─x index.md 
+        ├─x installation.md
+        ├── instance.md
+        ├── join.md
+        ├── list.md
+        ├── migration.md
+        ├── migration-vue-router.md
+        ├── migration-vuex.md
+        ├── mixins.md
+        ├── plugins.md
+        ├── reactivity.md
+        ├── render-function.md
+        ├── routing.md
+        ├── single-file-components.md
+        ├── ssr.md
+        ├── state-management.md
+        ├─- syntax.md
+        ├── transitioning-state.md
+        ├── transitions.md
+        ├── typescript.md
+        └── unit-testing.md
+```
 
 ### Want to help with the translation?
 
